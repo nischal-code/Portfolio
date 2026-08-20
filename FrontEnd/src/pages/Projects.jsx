@@ -41,7 +41,7 @@ const projects = [
     description:
       "A web application sketched to help the function of a restaurant named ghumtey by keeping track of order and inventory.",
     tech: ["Node.js", "Express", "Redis"],
-    image: img.social,
+    image: img.ghumtey,
     featured: false,
   },
   {
