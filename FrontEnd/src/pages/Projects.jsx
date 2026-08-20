@@ -139,8 +139,14 @@ export default function Projects() {
       <section className="max-w-6xl mx-auto px-6 md:px-12 py-20 md:py-28 text-center">
         <Reveal>
           <p className="fd-body text-ink-mute text-sm">
-            Have something in mind? I'd like to hear about it.
+            Have Some Curiosity.
           </p>
+          <button
+            onClick={() => window.open("/resume.pdf", "_blank")}
+            className="mt-8 text-[12px] tracking-[0.12em] uppercase border border-ink/25 rounded-full px-5 py-2.5 text-ink/80 hover:text-accent hover:border-accent/50 transition-colors duration-200 hover:cursor-pointer"
+          >
+            check My Resume
+          </button>
         </Reveal>
       </section>
     </div>

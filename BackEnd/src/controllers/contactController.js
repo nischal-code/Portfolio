@@ -19,7 +19,7 @@ export async function submitContact(req, res) {
       res.status(200).json({
       ok: true,
       saved,
-      message: "Message Recieved! Thank you. Will contact you soon.",
+      message: "Message sent — thanks for reaching out!",
     });
     } catch (err) {
       console.error("[contact] failed to save to MongoDB:", err.message);
@@ -29,14 +29,16 @@ export async function submitContact(req, res) {
   }
 
   try {
-  } 
-  await sendOwnerNotification({ name, email, subject, message });
-  try {
-    await sendVisitorAutoReply({ name, email });
+    await sendOwnerNotification({ name, email, subject, message });
+
+    try {
+      await sendVisitorAutoReply({ name, email });
+    } catch (err) {
+      console.error("[contact] auto-reply failed:", err.message);
+    }
+
+    
   } catch (err) {
-    console.error("[contact] auto-reply failed:", err.message);
-  }
-  catch (err) {
     console.error("[contact] failed to send:", err.message);
     return res.status(500).json({
       ok: false,
@@ -44,5 +46,4 @@ export async function submitContact(req, res) {
       message: "Something went wrong sending your message. Please try again shortly.",
     });
   }
-  
 }
