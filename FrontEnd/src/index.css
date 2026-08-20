@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Premium dark editorial system — warm charcoal, not pure black */
+  --color-bg: #0d0d0c;
+  --color-bg-soft: #151513;
+  --color-surface: #1b1a18;
+  --color-surface-hover: #22211f;
+
+  --color-ink: #f1eee7;
+  --color-ink-soft: #a8a49b;
+  --color-ink-mute: #77736b;
+
+  --color-line: rgba(241, 238, 231, 0.14);
+  --color-line-strong: rgba(241, 238, 231, 0.25);
+
+  --color-accent: #9b3a35;
+  --color-accent-hover: #b44a43;
+
+  /* legacy blueprint tokens kept for compatibility, retuned to the dark system */
+  --color-blueprint: #0d0d0c;
+  --color-blueprint-grid: rgba(241, 238, 231, 0.06);
+  --color-blueprint-fg: #f1eee7;
+  --color-signal: #9b3a35;
+
+  --font-display: "Fraunces", serif;
+  --font-body: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+/* Reveal mechanic: bottom layer always live, top layer clipped via JS */
+.reveal-container {
+  position: relative;
+  display: grid;
+  overflow: hidden; /* only needed if you still want the clip-path masked */
+}
+.reveal-layer {
+  grid-area: 1 / 1; /* remove position:absolute + inset:0 */
+}
+
+.reveal-ring {
+  position: absolute;
+  border: 1px solid rgba(241, 238, 231, 0.85);
+  border-radius: 9999px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  z-index: 30;
+}
+
+/* torn-seam divider between hero and content */
+.seam {
+  clip-path: polygon(
+    0% 100%, 0% 40%, 4% 60%, 8% 20%, 12% 70%, 16% 30%, 20% 65%,
+    24% 15%, 28% 55%, 32% 25%, 36% 68%, 40% 35%, 44% 60%, 48% 20%,
+    52% 70%, 56% 30%, 60% 65%, 64% 18%, 68% 58%, 72% 28%, 76% 66%,
+    80% 22%, 84% 62%, 88% 32%, 92% 68%, 96% 24%, 100% 55%, 100% 100%
+  );
+}
+
+.blueprint-grid {
+  background-image:
+    linear-gradient(var(--color-blueprint-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-blueprint-grid) 1px, transparent 1px);
+  background-size: 44px 44px;
+  background-color: var(--color-blueprint);
+}
+
+.paper-texture {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(241, 238, 231, 0.025) 0px,
+    rgba(241, 238, 231, 0.025) 1px,
+    transparent 1px,
+    transparent 14px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* ================================================================
+   Shared design system — Home / About / Projects / Experience /
+   Contact / Footer. One dark editorial language across every page:
+   warm charcoal surfaces, off-white type, burgundy as the single
+   signature accent. No neon, no multi-hue gradients.
+   ================================================================ */
+
+.fd-display { font-family: "Fraunces", serif; }
+.fd-mono { font-family: "JetBrains Mono", monospace; }
+.fd-body { font-family: "Inter", sans-serif; }
+
+.fd-eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+/* single subtle grid used across all sections — dark and darker alike */
+.fd-cross,
+.fd-cross-light,
+.fd-cross-dark {
+  background-image:
+    linear-gradient(to right, rgba(241, 238, 231, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(241, 238, 231, 0.045) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* elevated / signature surface (Footer, Bottom reveal layer) —
+   deep charcoal with a faint burgundy glow, never a bright gradient */
+.fd-surface-dark {
+  
+}
+
+.fd-name-gradient {
+  background: linear-gradient(100deg, #9b3a35 0%, #b44a43 45%, #c46158 65%, #9b3a35 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.fd-link { position: relative; }
+.fd-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.fd-link:hover::after,
+.fd-link:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+.fd-link:focus-visible { outline: 1px solid rgba(155, 58, 53, 0.65); outline-offset: 4px; border-radius: 1px; }
+
+.fd-btn-primary {
+  color: #f1eee7;
+  background: #9b3a35;
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+.fd-btn-primary:hover { filter: brightness(1.15); transform: translateY(-1px); }
+
+.fd-btn-ghost {
+  border: 1px solid rgba(241, 238, 231, 0.25);
+  color: rgba(241, 238, 231, 0.85);
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+.fd-btn-ghost:hover {
+  color: #f1eee7;
+  border-color: rgba(155, 58, 53, 0.55);
+  background-color: rgba(241, 238, 231, 0.04);
+}
+
+.fd-btn-dark {
+  color: #f1eee7;
+  background: #9b3a35;
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+.fd-btn-dark:hover { filter: brightness(1.15); transform: translateY(-1px); }
+
+.fd-tag,
+.fd-tag-dark {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(241, 238, 231, 0.16);
+  color: rgba(241, 238, 231, 0.65);
+}
+
+@keyframes fdCornerH { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes fdCornerV { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.fd-corner-h { animation: fdCornerH 0.6s cubic-bezier(0.19, 1, 0.22, 1) both; }
+.fd-corner-v { animation: fdCornerV 0.6s cubic-bezier(0.19, 1, 0.22, 1) both; }
+
+/* Scroll reveal — toggled by the Reveal component / useReveal hook */
+.fd-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1), transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.fd-reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* Experience timeline */
+.fd-timeline-line { background: rgba(241, 238, 231, 0.14); }
+.fd-timeline-fill {
+  background: #9b3a35;
+  transform-origin: top;
+  transition: transform 0.15s linear;
+}
+.fd-timeline-dot { transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; }
+
+/* Contact form */
+.fd-field input,
+.fd-field textarea {
+  width: 100%;
+  background: #151513;
+  border: 1px solid rgba(241, 238, 231, 0.15);
+  border-radius: 8px;
+  color: #f1eee7;
+  font-family: "Inter", sans-serif;
+  padding: 10px 12px;
+  transition: border-color 0.25s ease;
+  outline: none;
+  resize: none;
+}
+.fd-field input:focus,
+.fd-field textarea:focus { border-color: #9b3a35; }
+.fd-field input::placeholder,
+.fd-field textarea::placeholder { color: #77736b; }
+.fd-field-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #a8a49b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fd-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .fd-corner-h, .fd-corner-v { animation: none !important; }
+  .fd-timeline-fill { transition: none !important; }
+}
