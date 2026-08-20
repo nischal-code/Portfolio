@@ -16,6 +16,11 @@ export async function submitContact(req, res) {
         userAgent: req.get("user-agent"),
       });
       saved = true;
+      res.status(200).json({
+      ok: true,
+      saved,
+      message: "Message Recieved! Thank you. Will contact you soon.",
+    });
     } catch (err) {
       console.error("[contact] failed to save to MongoDB:", err.message);
     }
@@ -23,25 +28,21 @@ export async function submitContact(req, res) {
     console.warn("[contact] MongoDB not connected — skipping save.");
   }
 
-  // try {
-  // } 
-  // await sendOwnerNotification({ name, email, subject, message });
-  // try {
-  //   await sendVisitorAutoReply({ name, email });
-  // } catch (err) {
-  //   console.error("[contact] auto-reply failed:", err.message);
-  // }
-  // catch (err) {
-  //   console.error("[contact] failed to send:", err.message);
-  //   return res.status(500).json({
-  //     ok: false,
-  //     saved,
-  //     message: "Something went wrong sending your message. Please try again shortly.",
-  //   });
-  // }
-  return res.status(200).json({
-      ok: true,
+  try {
+  } 
+  await sendOwnerNotification({ name, email, subject, message });
+  try {
+    await sendVisitorAutoReply({ name, email });
+  } catch (err) {
+    console.error("[contact] auto-reply failed:", err.message);
+  }
+  catch (err) {
+    console.error("[contact] failed to send:", err.message);
+    return res.status(500).json({
+      ok: false,
       saved,
-      message: "Message Recieved! Thank you. Will contact you soon.",
+      message: "Something went wrong sending your message. Please try again shortly.",
     });
+  }
+  
 }
