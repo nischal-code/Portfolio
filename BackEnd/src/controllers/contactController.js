@@ -23,30 +23,25 @@ export async function submitContact(req, res) {
     console.warn("[contact] MongoDB not connected — skipping save.");
   }
 
+  // try {
+  // } 
+  await sendOwnerNotification({ name, email, subject, message });
   try {
-    // Notify the site owner — if this fails, the submission failed
-    // from the visitor's point of view, even if it was saved above.
-    await sendOwnerNotification({ name, email, subject, message });
-
-    // Best-effort auto-reply to the visitor; don't fail the whole
-    // request over this one, since the owner already has the message.
-    try {
-      await sendVisitorAutoReply({ name, email });
-    } catch (err) {
-      console.error("[contact] auto-reply failed:", err.message);
-    }
-
-    return res.status(200).json({
+    await sendVisitorAutoReply({ name, email });
+  } catch (err) {
+    console.error("[contact] auto-reply failed:", err.message);
+  }
+  // catch (err) {
+  //   console.error("[contact] failed to send:", err.message);
+  //   return res.status(500).json({
+  //     ok: false,
+  //     saved,
+  //     message: "Something went wrong sending your message. Please try again shortly.",
+  //   });
+  // }
+  return res.status(200).json({
       ok: true,
       saved,
-      message: "Message sent — thanks for reaching out!",
+      message: "Message Recieved! Thank you. Will contact you soon.",
     });
-  } catch (err) {
-    console.error("[contact] failed to send:", err.message);
-    return res.status(500).json({
-      ok: false,
-      saved,
-      message: "Something went wrong sending your message. Please try again shortly.",
-    });
-  }
 }
