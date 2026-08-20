@@ -35,6 +35,8 @@ export default function Form() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form),
             });
+
+            console.log(form);
             const data = await res.json();
 
             if (!res.ok || !data.ok) {
