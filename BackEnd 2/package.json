@@ -1,0 +1,20 @@
+{
+  "name": "portfolio-contact-backend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Backend for the portfolio Contact form — validates submissions and emails you (with an auto-reply to the sender).",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
+    "mongoose": "^8.9.5",
+    "nodemailer": "^6.9.16"
+  }
+}
