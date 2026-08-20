@@ -40,7 +40,11 @@ const projects = [
     year: "2025",
     description:
       "A web application sketched to help the function of a restaurant named ghumtey by keeping track of order and inventory.",
+<<<<<<< HEAD
     tech: ["Node.js", "Express", "Redis"],
+=======
+    tech: ["ReactJs","Tailwind-CSS","Node.js","Express","MongoDB"],
+>>>>>>> 68c4fc0 (final)
     image: img.ghumtey,
     featured: false,
   },
