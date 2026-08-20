@@ -25,12 +25,12 @@ export async function submitContact(req, res) {
 
   // try {
   // } 
-  await sendOwnerNotification({ name, email, subject, message });
-  try {
-    await sendVisitorAutoReply({ name, email });
-  } catch (err) {
-    console.error("[contact] auto-reply failed:", err.message);
-  }
+  // await sendOwnerNotification({ name, email, subject, message });
+  // try {
+  //   await sendVisitorAutoReply({ name, email });
+  // } catch (err) {
+  //   console.error("[contact] auto-reply failed:", err.message);
+  // }
   // catch (err) {
   //   console.error("[contact] failed to send:", err.message);
   //   return res.status(500).json({
