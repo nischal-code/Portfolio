@@ -21,8 +21,8 @@ export const env = {
   smtpUser: required("SMTP_USER"),
   smtpPass: required("SMTP_PASS"),
 
-  mongoUri: process.env.MONGODB_URI, // optional — checked at connect time
-
+  mongoUri: process.env.MONGODB_URI,
+  healthURL:process.env.HEALTH_URL,
   ownerEmail: required("OWNER_EMAIL"),
   siteName: process.env.SITE_NAME || "Portfolio",
 };

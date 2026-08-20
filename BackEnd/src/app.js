@@ -33,4 +33,15 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({ ok: false, message: err.message || "Server error" });
 });
 
+setInterval(async () => {
+  try {
+    const response = await fetch(env.healthURL);
+
+    console.log(
+      `[HEALTH CHECK] ${new Date().toISOString()} - Status: ${response.status}`
+    );
+  } catch (error) {
+    console.error("[HEALTH CHECK] Failed:", error.message);
+  }
+}, 10 * 60 * 1000);
 export default app;
