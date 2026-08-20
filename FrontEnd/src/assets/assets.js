@@ -5,6 +5,7 @@ import HRS from "./SunyaHRS.png"
 import Sunya from "./Sunya.png"
 import social from "./socialMedia.png"
 import spotify from "./spotify.png"
+import ghumtey from "./Ghumtey.png"
 
 export const img = {
     sketch,
@@ -13,5 +14,6 @@ export const img = {
     HRS,
     Sunya,
     social,
-    spotify
+    spotify,
+    ghumtey
 }

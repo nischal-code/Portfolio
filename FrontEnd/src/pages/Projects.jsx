@@ -35,6 +35,16 @@ const projects = [
     featured: false,
   },
   {
+    name: "Ghumtey",
+    type: "Web App",
+    year: "2025",
+    description:
+      "A web application sketched to help the function of a restaurant named ghumtey by keeping track of order and inventory.",
+    tech: ["Node.js", "Express", "Redis"],
+    image: img.social,
+    featured: false,
+  },
+  {
     name: "Spotify Clone",
     type: "Web App",
     year: "2024",
