@@ -35,6 +35,16 @@ const projects = [
     featured: false,
   },
   {
+    name: "NexusFlow",
+    type: "Web App",
+    year: "2026",
+    description:
+      "A web app that help to keep the inventory and orders managed by keeping the track of products in inventory and orders. On the other hand, It tracks the live location of the costumers order.",
+    tech: ["Reactjs","Node.js", "Express","MongoDB"],
+    image: img.nexus,
+    featured: false,
+  },
+  {
     name: "Ghumtey",
     type: "Web App",
     year: "2025",
