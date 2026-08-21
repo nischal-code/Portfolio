@@ -202,7 +202,7 @@ export default function Bottom({ revealed, setRevealed }) {
                         <span className="fd-cursor text-accent">_</span>
                     </div>
                     <p
-                        className="fd-in fd-body mt-8 max-w-md text-ink-soft leading-relaxed text-[15px] md:text-base"
+                        className="fd-in fd-body mt-8 max-w-md text-ink-soft leading-relaxed text-[15px] md:text-base text-black"
                         style={{ animationDelay: "0.55s" }}
                     >
                         I build interfaces end to end — from layout and interaction
